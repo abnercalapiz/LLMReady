@@ -1,0 +1,68 @@
+/**
+ * LLM Ready Admin Styles
+ */
+
+.llmr-header {
+    margin-bottom: 30px;
+}
+
+.llmr-header p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.llmr-actions {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.llmr-actions h2 {
+    margin-top: 0;
+}
+
+.llmr-actions .spinner {
+    float: none;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+#llmr-message {
+    margin-top: 15px;
+}
+
+#llmr-message .notice {
+    margin: 0;
+}
+
+.llmr-info {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+}
+
+.llmr-info h2 {
+    margin-top: 0;
+}
+
+/* Settings fields */
+.form-table textarea {
+    font-family: monospace;
+}
+
+/* URL management fields */
+#llmr_settings .description {
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+    .llmr-actions,
+    .llmr-info {
+        padding: 15px;
+    }
+}
