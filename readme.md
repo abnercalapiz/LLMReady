@@ -4,7 +4,7 @@
 **Tags:** seo, ai, llms, chatgpt, perplexity, claude, visibility  
 **Requires at least:** WordPress 5.2  
 **Tested up to:** WordPress 6.4  
-**Stable tag:** 1.0.0  
+**Stable tag:** 1.0.1  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -103,6 +103,16 @@ By default, the file is automatically regenerated whenever you publish, update, 
 
 ## Changelog
 
+### 1.0.1
+* **Fixed**: PHP parse errors in admin class (missing semicolons)
+* **Fixed**: Duplicate method declaration in generator class
+* **Fixed**: Missing field callback implementations for MCP settings
+* **Added**: Business hours functionality with timezone support
+* **Added**: MCP test tool for easy endpoint testing
+* **Added**: Comprehensive MCP documentation and guides
+* **Improved**: MCP admin interface with inline testing
+* **Improved**: Enhanced field sanitization and validation
+
 ### 1.0.0
 * Initial release
 * Automatic llms.txt generation
@@ -117,6 +127,9 @@ By default, the file is automatically regenerated whenever you publish, update, 
 * **NEW**: Future-ready booking system integration
 
 ## Upgrade Notice
+
+### 1.0.1
+Important bug fixes for MCP settings and improved functionality. Adds business hours support and comprehensive testing tools.
 
 ### 1.0.0
 Initial release of LLM Ready. Install to start improving your AI tool visibility!

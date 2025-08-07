@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Ready MCP Test Tool</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+        .test-section h2 {
+            margin-top: 0;
+            color: #444;
+        }
+        button {
+            background: #0073aa;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #005a87;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-right: 10px;
+            width: 300px;
+        }
+        pre {
+            background: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .endpoint-url {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .search-options {
+            margin-top: 10px;
+        }
+        .search-options label {
+            display: inline-block;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+        select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LLM Ready MCP Test Tool</h1>
+        <p class="subtitle">Test all MCP endpoints easily. Replace the base URL with your site URL.</p>
+        
+        <div style="margin-bottom: 30px;">
+            <label><strong>Your Site URL:</strong></label>
+            <input type="text" id="baseUrl" value="https://yoursite.com" style="width: 400px;" />
+            <button onclick="updateAllEndpoints()">Update URLs</button>
+        </div>
+
+        <!-- GET Endpoints -->
+        <div class="test-section">
+            <h2>📊 GET Endpoints (Click to Test)</h2>
+            <p>These endpoints can be tested directly in your browser or by clicking the buttons below.</p>
+            
+            <div style="margin-bottom: 15px;">
+                <span class="endpoint-url" id="discovery-url">/wp-json/llmr/mcp/v1/discovery</span>
+                <button onclick="testEndpoint('discovery')">Test Discovery</button>
+                <div id="discovery-status" class="status"></div>
+                <pre id="discovery-result" style="display: none;"></pre>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <span class="endpoint-url" id="business-url">/wp-json/llmr/mcp/v1/business</span>
+                <button onclick="testEndpoint('business')">Test Business Info</button>
+                <div id="business-status" class="status"></div>
+                <pre id="business-result" style="display: none;"></pre>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <span class="endpoint-url" id="contact-url">/wp-json/llmr/mcp/v1/contact</span>
+                <button onclick="testEndpoint('contact')">Test Contact Info</button>
+                <div id="contact-status" class="status"></div>
+                <pre id="contact-result" style="display: none;"></pre>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <span class="endpoint-url" id="services-url">/wp-json/llmr/mcp/v1/services</span>
+                <button onclick="testEndpoint('services')">Test Services</button>
+                <div id="services-status" class="status"></div>
+                <pre id="services-result" style="display: none;"></pre>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <span class="endpoint-url" id="booking-url">/wp-json/llmr/mcp/v1/booking</span>
+                <button onclick="testEndpoint('booking')">Test Booking</button>
+                <div id="booking-status" class="status"></div>
+                <pre id="booking-result" style="display: none;"></pre>
+            </div>
+        </div>
+
+        <!-- POST Endpoint (Search) -->
+        <div class="test-section">
+            <h2>🔍 Search Endpoint (POST)</h2>
+            <p>This endpoint requires a POST request with search parameters.</p>
+            
+            <div>
+                <span class="endpoint-url" id="search-url">/wp-json/llmr/mcp/v1/search</span>
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <input type="text" id="searchQuery" placeholder="Enter search term" value="wordpress" />
+                <input type="number" id="searchLimit" placeholder="Limit" value="5" min="1" max="100" style="width: 100px;" />
+                <button onclick="testSearch()">Search</button>
+            </div>
+            
+            <div class="search-options">
+                <label>Post Type:</label>
+                <select id="postType" multiple style="height: 60px;">
+                    <option value="post" selected>Posts</option>
+                    <option value="page" selected>Pages</option>
+                    <option value="product">Products</option>
+                </select>
+                
+                <label style="margin-left: 20px;">Order By:</label>
+                <select id="orderBy">
+                    <option value="relevance">Relevance</option>
+                    <option value="date">Date</option>
+                    <option value="title">Title</option>
+                </select>
+            </div>
+            
+            <div id="search-status" class="status"></div>
+            <pre id="search-result" style="display: none;"></pre>
+        </div>
+
+        <!-- cURL Examples -->
+        <div class="test-section">
+            <h2>🔧 cURL Examples</h2>
+            <p>Copy these commands to test from your terminal:</p>
+            
+            <h3>GET Request Example:</h3>
+            <pre id="curl-get">curl https://yoursite.com/wp-json/llmr/mcp/v1/business</pre>
+            
+            <h3>POST Request Example (Search):</h3>
+            <pre id="curl-post">curl -X POST https://yoursite.com/wp-json/llmr/mcp/v1/search \
+  -H "Content-Type: application/json" \
+  -d '{"query": "wordpress", "limit": 5}'</pre>
+        </div>
+    </div>
+
+    <script>
+        let baseUrl = 'https://yoursite.com';
+
+        function updateAllEndpoints() {
+            baseUrl = document.getElementById('baseUrl').value.replace(/\/$/, '');
+            
+            // Update all endpoint displays
+            document.getElementById('discovery-url').textContent = baseUrl + '/wp-json/llmr/mcp/v1/discovery';
+            document.getElementById('business-url').textContent = baseUrl + '/wp-json/llmr/mcp/v1/business';
+            document.getElementById('contact-url').textContent = baseUrl + '/wp-json/llmr/mcp/v1/contact';
+            document.getElementById('services-url').textContent = baseUrl + '/wp-json/llmr/mcp/v1/services';
+            document.getElementById('booking-url').textContent = baseUrl + '/wp-json/llmr/mcp/v1/booking';
+            document.getElementById('search-url').textContent = baseUrl + '/wp-json/llmr/mcp/v1/search';
+            
+            // Update cURL examples
+            document.getElementById('curl-get').textContent = `curl ${baseUrl}/wp-json/llmr/mcp/v1/business`;
+            document.getElementById('curl-post').textContent = `curl -X POST ${baseUrl}/wp-json/llmr/mcp/v1/search \\
+  -H "Content-Type: application/json" \\
+  -d '{"query": "wordpress", "limit": 5}'`;
+        }
+
+        async function testEndpoint(endpoint) {
+            const statusEl = document.getElementById(`${endpoint}-status`);
+            const resultEl = document.getElementById(`${endpoint}-result`);
+            
+            statusEl.style.display = 'block';
+            statusEl.className = 'status';
+            statusEl.textContent = 'Loading...';
+            
+            try {
+                const response = await fetch(`${baseUrl}/wp-json/llmr/mcp/v1/${endpoint}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusEl.className = 'status success';
+                    statusEl.textContent = '✓ Success! Response received.';
+                    resultEl.style.display = 'block';
+                    resultEl.textContent = JSON.stringify(data, null, 2);
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.textContent = `✗ Error: ${response.status} ${response.statusText}`;
+                    resultEl.style.display = 'block';
+                    resultEl.textContent = JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = `✗ Error: ${error.message}`;
+                resultEl.style.display = 'block';
+                resultEl.textContent = error.toString();
+            }
+        }
+
+        async function testSearch() {
+            const statusEl = document.getElementById('search-status');
+            const resultEl = document.getElementById('search-result');
+            
+            const query = document.getElementById('searchQuery').value;
+            const limit = parseInt(document.getElementById('searchLimit').value) || 10;
+            
+            // Get selected post types
+            const postTypeSelect = document.getElementById('postType');
+            const postTypes = Array.from(postTypeSelect.selectedOptions).map(option => option.value);
+            
+            const orderBy = document.getElementById('orderBy').value;
+            
+            if (!query) {
+                statusEl.style.display = 'block';
+                statusEl.className = 'status error';
+                statusEl.textContent = '✗ Please enter a search term';
+                return;
+            }
+            
+            statusEl.style.display = 'block';
+            statusEl.className = 'status';
+            statusEl.textContent = 'Searching...';
+            
+            const requestBody = {
+                query: query,
+                limit: limit
+            };
+            
+            // Add optional parameters if they differ from defaults
+            if (postTypes.length > 0 && postTypes.length < 2) {
+                requestBody.post_type = postTypes;
+            }
+            
+            if (orderBy !== 'relevance') {
+                requestBody.orderby = orderBy;
+            }
+            
+            try {
+                const response = await fetch(`${baseUrl}/wp-json/llmr/mcp/v1/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusEl.className = 'status success';
+                    const resultCount = data.results ? data.results.length : 0;
+                    statusEl.textContent = `✓ Success! Found ${resultCount} results.`;
+                    resultEl.style.display = 'block';
+                    resultEl.textContent = JSON.stringify(data, null, 2);
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.textContent = `✗ Error: ${response.status} ${response.statusText}`;
+                    resultEl.style.display = 'block';
+                    resultEl.textContent = JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = `✗ Error: ${error.message}`;
+                resultEl.style.display = 'block';
+                resultEl.textContent = error.toString();
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to get current site URL
+            if (window.location.hostname !== '') {
+                document.getElementById('baseUrl').value = window.location.origin;
+                updateAllEndpoints();
+            }
+        });
+    </script>
+</body>
+</html>

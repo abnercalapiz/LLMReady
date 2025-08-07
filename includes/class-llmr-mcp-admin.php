@@ -120,6 +120,45 @@ class LLMR_MCP_Admin {
             );
         }
         
+        // Business Hours Section
+        add_settings_section(
+            'llmr_mcp_hours',
+            __('Business Hours', 'llmr'),
+            array($this, 'hours_section_callback'),
+            'llmr_mcp_settings'
+        );
+        
+        // Days of the week
+        $days = array(
+            'monday' => __('Monday', 'llmr'),
+            'tuesday' => __('Tuesday', 'llmr'),
+            'wednesday' => __('Wednesday', 'llmr'),
+            'thursday' => __('Thursday', 'llmr'),
+            'friday' => __('Friday', 'llmr'),
+            'saturday' => __('Saturday', 'llmr'),
+            'sunday' => __('Sunday', 'llmr')
+        );
+        
+        foreach ($days as $day => $label) {
+            add_settings_field(
+                'hours_' . $day,
+                $label,
+                array($this, 'hours_field_callback'),
+                'llmr_mcp_settings',
+                'llmr_mcp_hours',
+                array('day' => $day)
+            );
+        }
+        
+        // Timezone field
+        add_settings_field(
+            'timezone',
+            __('Timezone', 'llmr'),
+            array($this, 'timezone_field_callback'),
+            'llmr_mcp_settings',
+            'llmr_mcp_hours'
+        );
+        
         // Services Section
         add_settings_section(
             'llmr_mcp_services',
@@ -194,9 +233,17 @@ class LLMR_MCP_Admin {
                     <button type="button" class="button" data-endpoint="business"><?php _e('Test Business Info', 'llmr'); ?></button>
                     <button type="button" class="button" data-endpoint="contact"><?php _e('Test Contact Info', 'llmr'); ?></button>
                     <button type="button" class="button" data-endpoint="services"><?php _e('Test Services', 'llmr'); ?></button>
+                    <button type="button" class="button button-primary" onclick="window.open('<?php echo LLMR_PLUGIN_URL; ?>mcp-test-tool.html', '_blank')"><?php _e('Open Full Test Tool', 'llmr'); ?></button>
                 </div>
                 
                 <div id="mcp-test-results" style="margin-top: 20px;"></div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #f1f1f1; border-radius: 4px;">
+                    <h3><?php _e('Quick Search Test', 'llmr'); ?></h3>
+                    <input type="text" id="test-search-query" placeholder="<?php _e('Enter search term', 'llmr'); ?>" value="test" style="width: 300px;" />
+                    <button type="button" class="button" onclick="testSearchEndpoint()"><?php _e('Test Search', 'llmr'); ?></button>
+                    <div id="search-test-result" style="margin-top: 10px;"></div>
+                </div>
             </div>
             
             <style>
@@ -257,6 +304,36 @@ class LLMR_MCP_Admin {
                         }
                     });
                 });
+                
+                // Search test function
+                window.testSearchEndpoint = function() {
+                    var query = jQuery('#test-search-query').val();
+                    var $result = jQuery('#search-test-result');
+                    
+                    if (!query) {
+                        $result.html('<div class="notice notice-error"><p>Please enter a search term</p></div>');
+                        return;
+                    }
+                    
+                    $result.html('<p>Searching...</p>');
+                    
+                    jQuery.ajax({
+                        url: '<?php echo rest_url('llmr/mcp/v1/search'); ?>',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            query: query,
+                            limit: 5
+                        }),
+                        success: function(response) {
+                            var resultCount = response.results ? response.results.length : 0;
+                            $result.html('<div class="notice notice-success"><p>✓ Search successful! Found ' + resultCount + ' results.</p></div><pre style="background: #f8f8f8; padding: 10px; overflow: auto;">' + JSON.stringify(response, null, 2) + '</pre>');
+                        },
+                        error: function(xhr) {
+                            $result.html('<div class="notice notice-error"><p>✗ Error: ' + xhr.responseText + '</p></div>');
+                        }
+                    });
+                };
             });
             </script>
         </div>
@@ -276,6 +353,10 @@ class LLMR_MCP_Admin {
     
     public function social_section_callback() {
         echo '<p>' . __('Social media profiles for your business.', 'llmr') . '</p>';
+    }
+    
+    public function hours_section_callback() {
+        echo '<p>' . __('Set your business hours that AI agents can share with users.', 'llmr') . '</p>';
     }
     
     public function services_section_callback() {
@@ -352,6 +433,7 @@ class LLMR_MCP_Admin {
         $value = isset($settings['phone_number']) ? $settings['phone_number'] : '';
         ?>
         <input type="tel" name="llmr_mcp_settings[phone_number]" value="<?php echo esc_attr($value); ?>" class="regular-text" />
+        <p class="description"><?php _e('Public business phone number', 'llmr'); ?></p>
         <?php
     }
     
@@ -360,6 +442,7 @@ class LLMR_MCP_Admin {
         $value = isset($settings['address']) ? $settings['address'] : '';
         ?>
         <input type="text" name="llmr_mcp_settings[address]" value="<?php echo esc_attr($value); ?>" class="large-text" />
+        <p class="description"><?php _e('Street address', 'llmr'); ?></p>
         <?php
     }
     
@@ -376,6 +459,7 @@ class LLMR_MCP_Admin {
         $value = isset($settings['state']) ? $settings['state'] : '';
         ?>
         <input type="text" name="llmr_mcp_settings[state]" value="<?php echo esc_attr($value); ?>" class="regular-text" />
+        <p class="description"><?php _e('State or Province', 'llmr'); ?></p>
         <?php
     }
     
@@ -399,8 +483,14 @@ class LLMR_MCP_Admin {
         $settings = get_option('llmr_mcp_settings');
         $value = isset($settings['response_time']) ? $settings['response_time'] : '';
         ?>
-        <input type="text" name="llmr_mcp_settings[response_time]" value="<?php echo esc_attr($value); ?>" class="regular-text" />
-        <p class="description"><?php _e('e.g., 24 hours, 1-2 business days', 'llmr'); ?></p>
+        <select name="llmr_mcp_settings[response_time]">
+            <option value=""><?php _e('Select Response Time', 'llmr'); ?></option>
+            <option value="Within 1 hour" <?php selected($value, 'Within 1 hour'); ?>><?php _e('Within 1 hour', 'llmr'); ?></option>
+            <option value="Within 24 hours" <?php selected($value, 'Within 24 hours'); ?>><?php _e('Within 24 hours', 'llmr'); ?></option>
+            <option value="1-2 business days" <?php selected($value, '1-2 business days'); ?>><?php _e('1-2 business days', 'llmr'); ?></option>
+            <option value="2-3 business days" <?php selected($value, '2-3 business days'); ?>><?php _e('2-3 business days', 'llmr'); ?></option>
+            <option value="Within 1 week" <?php selected($value, 'Within 1 week'); ?>><?php _e('Within 1 week', 'llmr'); ?></option>
+        </select>
         <?php
     }
     
@@ -409,6 +499,7 @@ class LLMR_MCP_Admin {
         $value = isset($settings['facebook_url']) ? $settings['facebook_url'] : '';
         ?>
         <input type="url" name="llmr_mcp_settings[facebook_url]" value="<?php echo esc_attr($value); ?>" class="large-text" />
+        <p class="description"><?php _e('e.g., https://facebook.com/yourbusiness', 'llmr'); ?></p>
         <?php
     }
     
@@ -417,6 +508,7 @@ class LLMR_MCP_Admin {
         $value = isset($settings['twitter_url']) ? $settings['twitter_url'] : '';
         ?>
         <input type="url" name="llmr_mcp_settings[twitter_url]" value="<?php echo esc_attr($value); ?>" class="large-text" />
+        <p class="description"><?php _e('e.g., https://twitter.com/yourbusiness', 'llmr'); ?></p>
         <?php
     }
     
@@ -425,6 +517,7 @@ class LLMR_MCP_Admin {
         $value = isset($settings['linkedin_url']) ? $settings['linkedin_url'] : '';
         ?>
         <input type="url" name="llmr_mcp_settings[linkedin_url]" value="<?php echo esc_attr($value); ?>" class="large-text" />
+        <p class="description"><?php _e('e.g., https://linkedin.com/company/yourbusiness', 'llmr'); ?></p>
         <?php
     }
     
@@ -433,6 +526,49 @@ class LLMR_MCP_Admin {
         $value = isset($settings['instagram_url']) ? $settings['instagram_url'] : '';
         ?>
         <input type="url" name="llmr_mcp_settings[instagram_url]" value="<?php echo esc_attr($value); ?>" class="large-text" />
+        <p class="description"><?php _e('e.g., https://instagram.com/yourbusiness', 'llmr'); ?></p>
+        <?php
+    }
+    
+    public function hours_field_callback($args) {
+        $day = $args['day'];
+        $settings = get_option('llmr_mcp_settings');
+        $open = isset($settings['hours_' . $day . '_open']) ? $settings['hours_' . $day . '_open'] : '';
+        $close = isset($settings['hours_' . $day . '_close']) ? $settings['hours_' . $day . '_close'] : '';
+        $closed = isset($settings['hours_' . $day . '_closed']) ? $settings['hours_' . $day . '_closed'] : false;
+        ?>
+        <label>
+            <input type="checkbox" name="llmr_mcp_settings[hours_<?php echo $day; ?>_closed]" value="1" <?php checked(1, $closed); ?> />
+            <?php _e('Closed', 'llmr'); ?>
+        </label>
+        &nbsp;&nbsp;
+        <span class="hours-inputs" style="<?php echo $closed ? 'display:none;' : ''; ?>">
+            <input type="time" name="llmr_mcp_settings[hours_<?php echo $day; ?>_open]" value="<?php echo esc_attr($open); ?>" />
+            <?php _e('to', 'llmr'); ?>
+            <input type="time" name="llmr_mcp_settings[hours_<?php echo $day; ?>_close]" value="<?php echo esc_attr($close); ?>" />
+        </span>
+        <script>
+        jQuery(function($) {
+            $('input[name="llmr_mcp_settings[hours_<?php echo $day; ?>_closed]"]').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $(this).parent().siblings('.hours-inputs').hide();
+                } else {
+                    $(this).parent().siblings('.hours-inputs').show();
+                }
+            });
+        });
+        </script>
+        <?php
+    }
+    
+    public function timezone_field_callback() {
+        $settings = get_option('llmr_mcp_settings');
+        $value = isset($settings['timezone']) ? $settings['timezone'] : get_option('timezone_string');
+        ?>
+        <select name="llmr_mcp_settings[timezone]">
+            <?php echo wp_timezone_choice($value); ?>
+        </select>
+        <p class="description"><?php _e('Select your business timezone', 'llmr'); ?></p>
         <?php
     }
     
@@ -503,11 +639,26 @@ class LLMR_MCP_Admin {
         // Text fields
         $text_fields = array('business_type', 'industry', 'contact_email', 'phone_number', 
                             'address', 'city', 'state', 'country', 'postal_code', 
-                            'response_time', 'employee_count');
+                            'response_time', 'employee_count', 'timezone');
         
         foreach ($text_fields as $field) {
             if (isset($input[$field])) {
                 $sanitized[$field] = sanitize_text_field($input[$field]);
+            }
+        }
+        
+        // Business hours fields
+        $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+        foreach ($days as $day) {
+            // Closed checkbox
+            $sanitized['hours_' . $day . '_closed'] = !empty($input['hours_' . $day . '_closed']) ? 1 : 0;
+            
+            // Open and close times
+            if (isset($input['hours_' . $day . '_open'])) {
+                $sanitized['hours_' . $day . '_open'] = sanitize_text_field($input['hours_' . $day . '_open']);
+            }
+            if (isset($input['hours_' . $day . '_close'])) {
+                $sanitized['hours_' . $day . '_close'] = sanitize_text_field($input['hours_' . $day . '_close']);
             }
         }
         

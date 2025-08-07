@@ -126,6 +126,22 @@ class LLMR_MCP_Server {
     public function handle_business_info($request) {
         $settings = get_option('llmr_mcp_settings', array());
         
+        // Build business hours array
+        $business_hours = array();
+        $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+        
+        foreach ($days as $day) {
+            if (!empty($settings['hours_' . $day . '_closed'])) {
+                $business_hours[$day] = 'Closed';
+            } else {
+                $open = !empty($settings['hours_' . $day . '_open']) ? $settings['hours_' . $day . '_open'] : '9:00';
+                $close = !empty($settings['hours_' . $day . '_close']) ? $settings['hours_' . $day . '_close'] : '17:00';
+                $business_hours[$day] = $open . ' - ' . $close;
+            }
+        }
+        
+        $business_hours['timezone'] = !empty($settings['timezone']) ? $settings['timezone'] : get_option('timezone_string', 'UTC');
+        
         $business_info = array(
             'name' => get_bloginfo('name'),
             'description' => get_bloginfo('description'),
@@ -135,7 +151,7 @@ class LLMR_MCP_Server {
             'founded' => !empty($settings['founded_year']) ? $settings['founded_year'] : '',
             'employees' => !empty($settings['employee_count']) ? $settings['employee_count'] : '',
             'services' => $this->get_services_summary(),
-            'hours' => !empty($settings['business_hours']) ? $settings['business_hours'] : array(),
+            'hours' => $business_hours,
             'locations' => !empty($settings['locations']) ? $settings['locations'] : array(),
             'social_media' => array(
                 'facebook' => !empty($settings['facebook_url']) ? $settings['facebook_url'] : '',
