@@ -17,6 +17,7 @@ class LLMR {
     protected $dashboard_widget;
     protected $mcp_server;
     protected $mcp_admin;
+    protected $stats;
     
     public function __construct() {
         $this->version = LLMR_VERSION;
@@ -33,6 +34,7 @@ class LLMR {
         $this->dashboard_widget = new LLMR_Dashboard_Widget();
         $this->mcp_server = new LLMR_MCP_Server();
         $this->mcp_admin = new LLMR_MCP_Admin();
+        $this->stats = new LLMR_Stats();
     }
     
     public function run() {

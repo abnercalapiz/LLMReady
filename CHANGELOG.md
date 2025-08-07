@@ -5,6 +5,24 @@ All notable changes to the LLM Ready WordPress Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2025-01-07
+
+### Added
+- Comprehensive Statistics page with analytics dashboard
+  - Overview cards showing key metrics
+  - Content statistics by post type
+  - MCP API usage tracking and visualization
+  - Interactive charts for daily and hourly activity
+  - Export statistics to CSV
+  - Reset statistics functionality
+- Automatic API call tracking for all MCP endpoints
+- Real-time usage monitoring
+- Chart.js integration for data visualization
+
+### Improved
+- Navigation menu now includes Stats submenu item
+- Better insights into AI agent interactions with your site
+
 ## [1.0.1] - 2025-01-07
 
 ### Fixed
@@ -22,11 +40,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Hours data now included in MCP `/business` endpoint response
 - MCP test tool (`mcp-test-tool.html`) for easy endpoint testing
 - Quick search test functionality in admin panel
-- Comprehensive MCP documentation:
-  - MCP-USAGE-GUIDE.md - Complete MCP implementation guide
-  - MCP-QUICK-START.md - Quick setup guide
-  - MCP-ENDPOINTS-GUIDE.md - Detailed endpoint documentation
-  - MCP-QUICK-REFERENCE.md - Quick reference for endpoints
 
 ### Improved
 - Enhanced MCP admin interface with inline search testing

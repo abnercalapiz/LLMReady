@@ -3,7 +3,7 @@
  * Plugin Name:       LLM Ready
  * Plugin URI:        https://www.jezweb.com.au/llm-ready
  * Description:       Improve your website's visibility and ranking in AI tools like ChatGPT, Perplexity, and Claude by automatically generating an llms.txt file and providing an MCP server for direct AI agent interactions.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Jezweb
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 
 // Define plugin constants
 if (!defined('LLMR_VERSION')) {
-    define('LLMR_VERSION', '1.0.1');
+    define('LLMR_VERSION', '1.0.2');
 }
 if (!defined('LLMR_PLUGIN_DIR')) {
     define('LLMR_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -41,6 +41,7 @@ $required_files = array(
     'includes/class-llmr-dashboard-widget.php',
     'includes/class-llmr-mcp-server.php',
     'includes/class-llmr-mcp-admin.php',
+    'includes/class-llmr-stats.php',            // Stats and analytics
     'includes/class-llmr.php'                   // Load main class last
 );
 

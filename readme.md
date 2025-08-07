@@ -4,7 +4,7 @@
 **Tags:** seo, ai, llms, chatgpt, perplexity, claude, visibility  
 **Requires at least:** WordPress 5.2  
 **Tested up to:** WordPress 6.4  
-**Stable tag:** 1.0.1  
+**Stable tag:** 1.0.2  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -103,6 +103,17 @@ By default, the file is automatically regenerated whenever you publish, update, 
 
 ## Changelog
 
+### 1.0.2
+* **Added**: Comprehensive Statistics page with analytics dashboard
+* **Added**: Content statistics by post type with inclusion percentages
+* **Added**: MCP API usage tracking and visualization
+* **Added**: Interactive charts for daily and hourly activity patterns
+* **Added**: Export statistics to CSV functionality
+* **Added**: Reset statistics option
+* **Added**: Automatic API call tracking for all MCP endpoints
+* **Improved**: Navigation menu now includes Stats submenu item
+* **Improved**: Better insights into AI agent interactions with your site
+
 ### 1.0.1
 * **Fixed**: PHP parse errors in admin class (missing semicolons)
 * **Fixed**: Duplicate method declaration in generator class
@@ -127,6 +138,9 @@ By default, the file is automatically regenerated whenever you publish, update, 
 * **NEW**: Future-ready booking system integration
 
 ## Upgrade Notice
+
+### 1.0.2
+Adds comprehensive statistics dashboard with usage tracking, charts, and export functionality. Monitor your AI agent interactions in real-time!
 
 ### 1.0.1
 Important bug fixes for MCP settings and improved functionality. Adds business hours support and comprehensive testing tools.
