@@ -5,6 +5,21 @@ All notable changes to the LLM Ready WordPress Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2025-01-09
+
+### Added
+- MCP (Model Context Protocol) configuration examples
+  - Multiple MCP configuration file formats for different implementations
+  - Examples for Claude Desktop integration
+  - OpenAPI specification for MCP endpoints
+  - HTTP-based and command-based MCP configurations
+  - Python example for testing MCP search functionality
+- MCP-REST API comparison documentation
+
+### Improved
+- Documentation for AI agent integration
+- Better examples for connecting AI tools to WordPress sites
+
 ## [1.0.2] - 2025-01-07
 
 ### Added

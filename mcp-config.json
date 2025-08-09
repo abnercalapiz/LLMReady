@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "wordpress-llmready": {
+      "command": "node",
+      "args": ["mcp-client.js"],
+      "env": {
+        "WORDPRESS_URL": "https://your-domain.com",
+        "MCP_VERSION": "v1"
+      }
+    }
+  }
+}

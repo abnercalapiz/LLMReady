@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "wordpress": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ],
+      "env": {
+        "WORDPRESS_SITE_URL": "https://your-domain.com",
+        "WORDPRESS_API_BASE": "/wp-json/llmr/mcp/v1"
+      }
+    }
+  }
+}
