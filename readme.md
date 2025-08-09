@@ -65,6 +65,47 @@ LLM Ready now includes a built-in MCP (Model Context Protocol) server that allow
 * Future-proof your website for AI-driven interactions
 * Ready for integration with booking systems and other services
 
+#### cURL Examples
+
+Test the MCP endpoints directly from your terminal:
+
+**GET Request Examples:**
+```bash
+# Discovery endpoint - Get all available endpoints
+curl https://yoursite.com/wp-json/llmr/mcp/v1/discovery
+
+# Business information
+curl https://yoursite.com/wp-json/llmr/mcp/v1/business
+
+# Contact details
+curl https://yoursite.com/wp-json/llmr/mcp/v1/contact
+
+# Services/Products list
+curl https://yoursite.com/wp-json/llmr/mcp/v1/services
+
+# All published pages
+curl https://yoursite.com/wp-json/llmr/mcp/v1/pages
+```
+
+**POST Request Example (Search):**
+```bash
+# Search for content
+curl -X POST https://yoursite.com/wp-json/llmr/mcp/v1/search \
+  -H "Content-Type: application/json" \
+  -d '{"query": "wordpress", "per_page": 5}'
+
+# Search with specific post type
+curl -X POST https://yoursite.com/wp-json/llmr/mcp/v1/search \
+  -H "Content-Type: application/json" \
+  -d '{"query": "services", "per_page": 10, "post_type": "page"}'
+```
+
+**Testing with jq (for pretty JSON output):**
+```bash
+# Install jq if needed: sudo apt-get install jq (Linux) or brew install jq (Mac)
+curl https://yoursite.com/wp-json/llmr/mcp/v1/business | jq '.'
+```
+
 ## Installation
 
 1. Upload the plugin files to the `/wp-content/plugins/llmr` directory, or install the plugin through the WordPress plugins screen directly
