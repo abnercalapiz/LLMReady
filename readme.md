@@ -4,7 +4,7 @@
 **Tags:** seo, ai, llms, chatgpt, perplexity, claude, visibility  
 **Requires at least:** WordPress 5.2  
 **Tested up to:** WordPress 6.4  
-**Stable tag:** 1.0.2  
+**Stable tag:** 1.0.3  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -103,6 +103,18 @@ By default, the file is automatically regenerated whenever you publish, update, 
 
 ## Changelog
 
+### 1.0.3
+* **Added**: MCP (Model Context Protocol) configuration examples
+  * Multiple MCP configuration file formats for different implementations
+  * Examples for Claude Desktop integration
+  * OpenAPI specification for MCP endpoints
+  * HTTP-based and command-based MCP configurations
+  * Python example for testing MCP search functionality
+* **Added**: MCP-REST API comparison documentation
+* **Added**: Comprehensive MCP testing guide with step-by-step instructions
+* **Improved**: Documentation for AI agent integration
+* **Improved**: Better examples for connecting AI tools to WordPress sites
+
 ### 1.0.2
 * **Added**: Comprehensive Statistics page with analytics dashboard
 * **Added**: Content statistics by post type with inclusion percentages
@@ -138,6 +150,9 @@ By default, the file is automatically regenerated whenever you publish, update, 
 * **NEW**: Future-ready booking system integration
 
 ## Upgrade Notice
+
+### 1.0.3
+Adds MCP configuration examples and comprehensive testing guide. Includes multiple formats for integrating with Claude Desktop and other AI tools.
 
 ### 1.0.2
 Adds comprehensive statistics dashboard with usage tracking, charts, and export functionality. Monitor your AI agent interactions in real-time!
