@@ -106,6 +106,43 @@ curl -X POST https://yoursite.com/wp-json/llmr/mcp/v1/search \
 curl https://yoursite.com/wp-json/llmr/mcp/v1/business | jq '.'
 ```
 
+#### MCP Configuration for AI Tools
+
+To connect your WordPress site to AI tools like Claude Desktop, add this configuration:
+
+```json
+{
+  "mcpServers": {
+    "wordpress-site": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch@latest"
+      ],
+      "env": {
+        "FETCH_CONFIG": {
+          "wordpress": {
+            "baseUrl": "https://your-domain.com/wp-json/llmr/mcp/v1",
+            "endpoints": {
+              "discovery": "/discovery",
+              "business": "/business",
+              "contact": "/contact",
+              "services": "/services",
+              "search": {
+                "path": "/search",
+                "method": "POST"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Replace `https://your-domain.com` with your actual WordPress site URL.
+
 ## Installation
 
 1. Upload the plugin files to the `/wp-content/plugins/llmr` directory, or install the plugin through the WordPress plugins screen directly
