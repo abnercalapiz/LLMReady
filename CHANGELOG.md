@@ -5,6 +5,16 @@ All notable changes to the LLM Ready WordPress Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.7] - 2025-08-11
+
+### Changed
+- Moved MCP configuration examples to the separate npm package (@abnerjezweb/wordpress-mcp-client)
+- Improved project structure by separating client and server components
+- Updated documentation to reference the npm package for configuration examples
+
+### Removed
+- Removed examples/mcp-configs folder (now in wordpress-mcp-client package)
+
 ## [1.0.6] - 2025-01-11
 
 ### Improved

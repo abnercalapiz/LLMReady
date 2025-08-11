@@ -4,7 +4,7 @@
 **Tags:** seo, ai, llms, chatgpt, perplexity, claude, visibility  
 **Requires at least:** WordPress 5.2  
 **Tested up to:** WordPress 6.4  
-**Stable tag:** 1.0.6  
+**Stable tag:** 1.0.7  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -71,7 +71,7 @@ Connect your WordPress site to AI tools like Claude Desktop for natural language
 
 📖 **[View the complete MCP Setup Guide](docs/MCP-SETUP-GUIDE.md)** for step-by-step instructions, including single site and multi-site configurations.
 
-Example configurations are available in the [examples/mcp-configs](examples/mcp-configs/) folder.
+Example configurations are available in the [@abnerjezweb/wordpress-mcp-client](https://github.com/abnercalapiz/wordpress-mcp-client) npm package.
 
 ## Installation
 
