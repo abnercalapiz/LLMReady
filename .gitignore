@@ -1,13 +1,6 @@
-# npm client
-npm-client/node_modules/
-npm-client/dist/
-npm-client/*.tgz
-npm-client/coverage/
-npm-client/.nyc_output/
-
-# WordPress plugin
-wordpress-plugin/vendor/
-wordpress-plugin/node_modules/
+# Dependencies
+vendor/
+node_modules/
 
 # IDE
 .vscode/
