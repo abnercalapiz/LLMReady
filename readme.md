@@ -71,6 +71,8 @@ Connect your WordPress site to AI tools like Claude Desktop for natural language
 
 📖 **[View the complete MCP Setup Guide](docs/MCP-SETUP-GUIDE.md)** for step-by-step instructions, including single site and multi-site configurations.
 
+Example configurations are available in the [examples/mcp-configs](examples/mcp-configs/) folder.
+
 ## Installation
 
 1. Upload the plugin files to the `/wp-content/plugins/llmr` directory, or install the plugin through the WordPress plugins screen directly
