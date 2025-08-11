@@ -4,7 +4,7 @@
 **Tags:** seo, ai, llms, chatgpt, perplexity, claude, visibility  
 **Requires at least:** WordPress 5.2  
 **Tested up to:** WordPress 6.4  
-**Stable tag:** 1.0.5  
+**Stable tag:** 1.0.6  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -67,42 +67,9 @@ LLM Ready now includes a built-in MCP (Model Context Protocol) server that allow
 
 #### MCP Configuration for AI Tools
 
-To connect your WordPress site to AI tools like Claude Desktop, add this configuration:
+Connect your WordPress site to AI tools like Claude Desktop for natural language queries. Once configured, you can simply type questions like "Show me posts about social media" without any code or commands.
 
-```json
-{
-  "mcpServers": {
-    "wordpress-site": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-fetch@latest"
-      ],
-      "env": {
-        "FETCH_CONFIG": {
-          "wordpress": {
-            "baseUrl": "https://your-domain.com/wp-json/llmr/mcp/v1",
-            "endpoints": {
-              "discovery": "/discovery",
-              "business": "/business",
-              "contact": "/contact",
-              "services": "/services",
-              "search": {
-                "path": "/search",
-                "method": "POST"
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-Replace `https://your-domain.com` with your actual WordPress site URL.
-
-For detailed step-by-step instructions on setting up MCP, including multi-site configurations, see the [MCP Setup Guide](MCP-SETUP-GUIDE.md).
+📖 **[View the complete MCP Setup Guide](MCP-SETUP-GUIDE.md)** for step-by-step instructions, including single site and multi-site configurations.
 
 ## Installation
 
@@ -141,6 +108,12 @@ By default, the file is automatically regenerated whenever you publish, update, 
 4. SEO plugin detection and integration
 
 ## Changelog
+
+### 1.0.6
+* **Improved**: Simplified MCP configuration section in README
+* **Improved**: Replaced technical JSON example with user-friendly description
+* **Improved**: Better focus on natural language benefits of MCP
+* **Enhanced**: Clearer link to comprehensive setup guide
 
 ### 1.0.5
 * **Improved**: Removed cURL examples from main README for better user experience
@@ -206,6 +179,9 @@ By default, the file is automatically regenerated whenever you publish, update, 
 * **NEW**: Future-ready booking system integration
 
 ## Upgrade Notice
+
+### 1.0.6
+Streamlined README with simplified MCP section. Technical configuration details moved to dedicated setup guide for better user experience.
 
 ### 1.0.5
 Improved documentation by removing technical cURL examples from README. Developer API reference now available in docs folder for those who need it.

@@ -5,6 +5,14 @@ All notable changes to the LLM Ready WordPress Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] - 2025-01-11
+
+### Improved
+- Simplified MCP configuration section in README
+- Replaced technical JSON configuration with user-friendly description
+- Better focus on natural language benefits of MCP integration
+- Enhanced link to comprehensive setup guide
+
 ## [1.0.5] - 2025-01-11
 
 ### Improved
