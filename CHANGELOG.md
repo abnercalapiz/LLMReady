@@ -5,6 +5,27 @@ All notable changes to the LLM Ready WordPress Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2025-01-11
+
+### Added
+- Comprehensive MCP Setup Guide (`MCP-SETUP-GUIDE.md`)
+  - Step-by-step instructions for single site configuration
+  - Multi-site setup guide for managing 100+ WordPress sites
+  - Natural language query examples
+  - Detailed troubleshooting section
+  - Best practices for MCP implementation
+- Multi-site MCP server example (`multi-wordpress-mcp.js`)
+  - Custom Node.js server for routing to multiple WordPress sites
+  - Unified interface for managing multiple installations
+- Additional Claude Desktop configuration examples
+  - `claude-multisite-config.json` for multi-site setups
+
+### Improved
+- Documentation structure with dedicated MCP setup guide
+- Better guidance for enterprise users managing multiple WordPress sites
+- Clear examples of natural language queries without code
+- Enhanced configuration examples for various use cases
+
 ## [1.0.3] - 2025-01-09
 
 ### Added

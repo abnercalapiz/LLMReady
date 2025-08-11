@@ -4,7 +4,7 @@
 **Tags:** seo, ai, llms, chatgpt, perplexity, claude, visibility  
 **Requires at least:** WordPress 5.2  
 **Tested up to:** WordPress 6.4  
-**Stable tag:** 1.0.3  
+**Stable tag:** 1.0.4  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -143,6 +143,8 @@ To connect your WordPress site to AI tools like Claude Desktop, add this configu
 
 Replace `https://your-domain.com` with your actual WordPress site URL.
 
+For detailed step-by-step instructions on setting up MCP, including multi-site configurations, see the [MCP Setup Guide](MCP-SETUP-GUIDE.md).
+
 ## Installation
 
 1. Upload the plugin files to the `/wp-content/plugins/llmr` directory, or install the plugin through the WordPress plugins screen directly
@@ -180,6 +182,17 @@ By default, the file is automatically regenerated whenever you publish, update, 
 4. SEO plugin detection and integration
 
 ## Changelog
+
+### 1.0.4
+* **Added**: Comprehensive MCP Setup Guide with step-by-step instructions
+  * Single site MCP configuration guide
+  * Multi-site setup for managing 100+ WordPress sites
+  * Natural language query examples
+  * Troubleshooting and best practices
+* **Added**: Multi-site MCP server example script
+* **Added**: Configuration examples for Claude Desktop
+* **Improved**: Documentation structure with dedicated setup guide
+* **Improved**: Better guidance for enterprise users managing multiple sites
 
 ### 1.0.3
 * **Added**: MCP (Model Context Protocol) configuration examples
@@ -228,6 +241,9 @@ By default, the file is automatically regenerated whenever you publish, update, 
 * **NEW**: Future-ready booking system integration
 
 ## Upgrade Notice
+
+### 1.0.4
+Adds comprehensive MCP Setup Guide with step-by-step instructions for single and multi-site configurations. Perfect for enterprise users managing multiple WordPress sites with AI agents.
 
 ### 1.0.3
 Adds MCP configuration examples and comprehensive testing guide. Includes multiple formats for integrating with Claude Desktop and other AI tools.

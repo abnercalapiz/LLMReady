@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "wordpress-multisite": {
+      "command": "node",
+      "args": ["/path/to/multi-wordpress-mcp.js"]
+    }
+  }
+}
