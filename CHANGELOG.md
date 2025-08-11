@@ -5,6 +5,20 @@ All notable changes to the LLM Ready WordPress Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2025-01-11
+
+### Improved
+- Removed cURL examples from main README for better user experience
+- Cleaner documentation focused on end-user needs  
+- Separated technical API details from user-facing documentation
+
+### Added
+- Developer API Reference documentation (`docs/DEVELOPER-API-REFERENCE.md`)
+  - Complete API endpoint documentation
+  - cURL examples for testing
+  - Integration notes for developers
+  - Troubleshooting guide
+
 ## [1.0.4] - 2025-01-11
 
 ### Added

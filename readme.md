@@ -4,7 +4,7 @@
 **Tags:** seo, ai, llms, chatgpt, perplexity, claude, visibility  
 **Requires at least:** WordPress 5.2  
 **Tested up to:** WordPress 6.4  
-**Stable tag:** 1.0.4  
+**Stable tag:** 1.0.5  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -64,47 +64,6 @@ LLM Ready now includes a built-in MCP (Model Context Protocol) server that allow
 * Provide real-time information to users through AI assistants
 * Future-proof your website for AI-driven interactions
 * Ready for integration with booking systems and other services
-
-#### cURL Examples
-
-Test the MCP endpoints directly from your terminal:
-
-**GET Request Examples:**
-```bash
-# Discovery endpoint - Get all available endpoints
-curl https://yoursite.com/wp-json/llmr/mcp/v1/discovery
-
-# Business information
-curl https://yoursite.com/wp-json/llmr/mcp/v1/business
-
-# Contact details
-curl https://yoursite.com/wp-json/llmr/mcp/v1/contact
-
-# Services/Products list
-curl https://yoursite.com/wp-json/llmr/mcp/v1/services
-
-# All published pages
-curl https://yoursite.com/wp-json/llmr/mcp/v1/pages
-```
-
-**POST Request Example (Search):**
-```bash
-# Search for content
-curl -X POST https://yoursite.com/wp-json/llmr/mcp/v1/search \
-  -H "Content-Type: application/json" \
-  -d '{"query": "wordpress", "per_page": 5}'
-
-# Search with specific post type
-curl -X POST https://yoursite.com/wp-json/llmr/mcp/v1/search \
-  -H "Content-Type: application/json" \
-  -d '{"query": "services", "per_page": 10, "post_type": "page"}'
-```
-
-**Testing with jq (for pretty JSON output):**
-```bash
-# Install jq if needed: sudo apt-get install jq (Linux) or brew install jq (Mac)
-curl https://yoursite.com/wp-json/llmr/mcp/v1/business | jq '.'
-```
 
 #### MCP Configuration for AI Tools
 
@@ -183,6 +142,12 @@ By default, the file is automatically regenerated whenever you publish, update, 
 
 ## Changelog
 
+### 1.0.5
+* **Improved**: Removed cURL examples from main README for better user experience
+* **Added**: Developer API Reference documentation in docs folder
+* **Improved**: Cleaner documentation focused on end-user needs
+* **Improved**: Separated technical API details from user-facing documentation
+
 ### 1.0.4
 * **Added**: Comprehensive MCP Setup Guide with step-by-step instructions
   * Single site MCP configuration guide
@@ -241,6 +206,9 @@ By default, the file is automatically regenerated whenever you publish, update, 
 * **NEW**: Future-ready booking system integration
 
 ## Upgrade Notice
+
+### 1.0.5
+Improved documentation by removing technical cURL examples from README. Developer API reference now available in docs folder for those who need it.
 
 ### 1.0.4
 Adds comprehensive MCP Setup Guide with step-by-step instructions for single and multi-site configurations. Perfect for enterprise users managing multiple WordPress sites with AI agents.
